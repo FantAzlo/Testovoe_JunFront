@@ -1,15 +1,21 @@
+body{
+    margin: 0px;
+}
 .App {
+    margin: 0px;
+    padding: 0px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 button:hover {
     cursor: pointer;
 }
-.PersonCard {
+.personCard {
     display: flex;
     border: 2px solid black ;
-    margin: 2px;
+    border-radius: 40px;
+    margin: 10px;
+    margin-left: 5vw;
     height: 80px;
     align-items: center;
     justify-content: space-between;
@@ -17,16 +23,88 @@ button:hover {
 }
 .editButton, .deleteButton {
     margin: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
 }
 .deleteButton {
     margin-right: 20px;
+    background-color: red;
 }
 .editButton{
     margin-left: 20px;
+    background-color: yellow;
 }
 .cardContent {
     margin-left: 20px;
 }
 .addButton {
     width: 150px;
+    height: 40px;
+    margin-left: 7vw;
+    background-color: aqua;
+    border-radius: 5px;
+}
+.Header {
+    padding-left: 6vw;
+    padding-top: 10px;
+    width: 100vw;
+    height: 30px;
+    color: aliceblue;
+    display: flex;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.content{
+    margin-top: 50px;
+}
+.editFilter{
+    position: fixed;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.editCard{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background-color: rgba(200,200,200,1);
+    border-radius: 20px;
+    height: 200px;
+    width: 400px;
+}
+.X,.O{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+.X{
+    background-color: red;
+    align-self: flex-end;
+    margin: 10px;
+}
+.O{
+    align-self: center;
+
+    justify-self:center;
+    background-color: chartreuse;
+}
+.editP{
+    margin: 30px;
+}
+.idContent{
+    margin: 20px;
+}
+input{
+    width: 93%;
+    display: flex;
+    text-align: center;
+    border-radius: 5px;
+    border: 0px;
+}
+.waitMes{
+    margin-left: 40vw;
 }
