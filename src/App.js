@@ -2,7 +2,10 @@ import './style.css';
 import React from 'react';
 import {useEffect, useState} from 'react';
 import {toast, Toaster} from 'react-hot-toast';
-import PropTypes from 'prop-types';
+import Header from './components/Header';
+import PersonCard from './components/PersonCard';
+import Agr from './components/Agr';
+import EditCard from './components/EditCard';
 
 function App() {// Main component
   const url = 'http://localhost:3001/persons';
@@ -47,23 +50,15 @@ function App() {// Main component
         .then((data) => console.log(data));
   }
 
-  function Header() {
-    return (
-      <div className={'Header'}>
-        <div className={'HeadText'}>
-          <el className={'idContent'}>id</el>
-                    Имя Фамилия
-        </div>
-      </div>
-    );
-  }
-
   const [cards, cardsChange] = useState(persons.map((person) =>
     <PersonCard
       key = {person.id}
       id={person.id}
       name={person.name}
       lastName={person.lastName}
+      setAgrVision={setAgrVision}
+      setEditCardVision={setEditCardVision}
+      setEditPersonId={setEditPersonId}
     />));
 
   function updateCards() {
@@ -73,141 +68,15 @@ function App() {// Main component
         id={person.id}
         name={person.name}
         lastName={person.lastName}
+        setAgrVision={setAgrVision}
+        setEditCardVision={setEditCardVision}
+        setEditPersonId={setEditPersonId}
       />));
   }// обновляет массив карт
 
-  function PersonCard(props) {
-    return (
-      <div className={'personCard'}>
-        <div className={'cardContent'}>
-          <el className={'idContent'}> {props.id} </el>
-          {props.name} {props.lastName}
-        </div>
-
-        <div className={'buttonsBlock'}>
-
-          <button className={'editButton'} onClick={() => {
-            setEditPersonId(props.id);
-            setEditCardVision(true);
-          }}> edit
-          </button>
-
-          <button className={'deleteButton'} onClick={() => {
-            setEditPersonId(props.id);
-            setAgrVision(true);
-          }}> delete
-          </button>
-
-        </div>
-      </div>
-    );
-  }// компонент карты пользователя
-
-  PersonCard.propTypes = {
-    id: PropTypes.number,
-    name: PropTypes.string,
-    lastName: PropTypes.string,
-  };
-
   const [editCardVision, setEditCardVision] = useState(false);
   const [agrVision, setAgrVision] = useState(false);
-
-  function Agr() {
-    const per = persons.find((item) => item.id == editPersonId);
-    if (agrVision) {
-      return (
-        <div className={'editFilter'}>
-          <div className={'editCard'}>
-            <button className={'X'} onClick={() => {
-              setAgrVision(false);
-            }}> X
-            </button>
-
-            <div className={'editP'}>
-                        Удалить этого пользователя?
-              <br/>
-                        id :
-              <el style={{color: 'white'}}> {per.id} </el>
-              <br/>
-              <el style={{color: 'white'}}>{per.name} </el>
-              <br/>
-              <el style={{color: 'white'}}>{per.lastName} </el>
-            </div>
-
-            <button className={'O'} onClick={() => {
-              setAgrVision(false);
-              deleteRequest(editPersonId);
-              setIsLoading(true);
-              toast.success('Пользователь успешно удален');
-            }
-            }> O
-            </button>
-          </div>
-        </div>);
-    } else return null;
-  }// модальноее окно удаления
-
   const [editPersonId, setEditPersonId] = useState(0);
-
-  function EditCard() {
-    if (editCardVision) {
-      let name; let lastName;
-      if (editPersonId != -1) {
-        const per = persons.find((item) => item.id == editPersonId);
-        name = per.name;
-        lastName = per.lastName;
-      } else {
-        name = 'New';
-        lastName = 'Person';
-      }
-
-      return (
-        <div className={'editFilter'}>
-          <div className={'editCard'}>
-
-            <button className={'X'} onClick={() => {
-              setEditCardVision(false);
-            }}> X
-            </button>
-
-            <div className={'editP'}>
-              <input defaultValue={name} onChange={(e) => {
-                name = e.target.value;
-              }}/>
-              <br/>
-              <input defaultValue={lastName} onChange={(e) => {
-                lastName = e.target.value;
-              }
-              }/>
-            </div>
-
-            <button className={'O'} onClick={() => {
-              if ((name != '') & (lastName != '')) {
-                setEditCardVision(false);
-                if (editPersonId != -1) {
-                  deleteRequest(editPersonId);
-                }
-                postRequest({
-                  'name': name,
-                  'lastName': lastName,
-                });
-                if (editPersonId == -1) {
-                  toast.success('Новый пользователь успешно создан');
-                } else toast.success('Пользователь изменен');
-                setIsLoading(true);
-              } else {
-                toast.error('Все поля должны быть заполнены');
-              }
-            }
-            }> O
-            </button>
-
-          </div>
-        </div>
-      );
-    } else return null;
-  }// модальное окно для редактирования
-
 
   if (!isLoading) {
     return (
@@ -219,8 +88,22 @@ function App() {// Main component
         />
 
         <Header/>
-        <Agr/>
-        <EditCard/>
+
+        <Agr persons = {persons}
+          editPersonId = {editPersonId}
+          agrVision = {agrVision}
+          setAgrVision = {setAgrVision}
+          deleteRequest = {deleteRequest}
+          setIsLoading = {setIsLoading}
+        />
+
+        <EditCard persons = {persons}
+          editPersonId = {editPersonId}
+          EditCardVision = {editCardVision}
+          setEditCardVision = {setEditCardVision}
+          deleteRequest = {deleteRequest}
+          postRequest={postRequest}
+          setIsLoading = {setIsLoading}/>
 
         <div className={'content'}>{cards}</div>
 
