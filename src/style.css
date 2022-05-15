@@ -73,8 +73,8 @@ button:hover {
     position: fixed;
     background-color: rgba(200,200,200,1);
     border-radius: 20px;
-    height: 200px;
-    width: 400px;
+    min-height: 200px;
+    min-width: 400px;
 }
 .X,.O{
     width: 30px;
@@ -88,8 +88,7 @@ button:hover {
 }
 .O{
     align-self: center;
-
-    justify-self:center;
+    margin-bottom: 10px;
     background-color: chartreuse;
 }
 .editP{
