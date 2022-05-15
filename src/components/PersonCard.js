@@ -5,7 +5,7 @@ function PersonCard(props) {
   return (
     <div className={'personCard'}>
       <div className={'cardContent'}>
-        <el className={'idContent'}> {props.id} </el>
+        <el className={'idContent'}> {props.id}: </el>
         {props.name} {props.lastName}
       </div>
 

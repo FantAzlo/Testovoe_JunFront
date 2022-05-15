@@ -33,7 +33,7 @@ function App() {// Main component
           if (response.ok) return response.json();
           else toast.error('Error' + response.status);
         })
-        .then((data) => console.log(data));
+        .then((data) => data);
   }
 
   function postRequest(person) {
@@ -47,7 +47,7 @@ function App() {// Main component
           if (response.ok) return response.json();
           else toast.error('Error' + response.status);
         })
-        .then((data) => console.log(data));
+        .then((data) => data);
   }
 
   const [cards, cardsChange] = useState(persons.map((person) =>
@@ -99,7 +99,7 @@ function App() {// Main component
 
         <EditCard persons = {persons}
           editPersonId = {editPersonId}
-          EditCardVision = {editCardVision}
+          editCardVision = {editCardVision}
           setEditCardVision = {setEditCardVision}
           deleteRequest = {deleteRequest}
           postRequest={postRequest}

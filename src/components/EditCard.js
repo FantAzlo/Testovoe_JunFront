@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 
 function EditCard(props) {
   if (props.editCardVision) {
-    let name; let lastName;
+    let name;
+    let lastName;
     if (props.editPersonId != -1) {
       const per = props.persons.find((item) => item.id == props.editPersonId);
       name = per.name;
@@ -36,19 +37,23 @@ function EditCard(props) {
           </div>
 
           <button className={'O'} onClick={() => {
-            if ((name != '') & (lastName != '')) {
-              setEditCardVision(false);
-              if (props.editPersonId != -1) {
-                props.deleteRequest(editPersonId);
+            if ((name != '') && (lastName != '')) {
+              if ((name.length < 10) && (lastName.length < 10)) {
+                props.setEditCardVision(false);
+                if (props.editPersonId != -1) {
+                  props.deleteRequest(props.editPersonId);
+                }
+                props.postRequest({
+                  'name': name,
+                  'lastName': lastName,
+                });
+                if (props.editPersonId == -1) {
+                  toast.success('Новый пользователь успешно создан');
+                } else toast.success('Пользователь изменен');
+                props.setIsLoading(true);
+              } else {
+                toast.error('Фамилия и Имя не могут превышать по объему 9 символов');
               }
-              props.postRequest({
-                'name': name,
-                'lastName': lastName,
-              });
-              if (props.editPersonId == -1) {
-                toast.success('Новый пользователь успешно создан');
-              } else toast.success('Пользователь изменен');
-              props.setIsLoading(true);
             } else {
               toast.error('Все поля должны быть заполнены');
             }

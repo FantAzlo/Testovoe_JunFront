@@ -1,5 +1,6 @@
 body{
     margin: 0px;
+    background-color: rgb(255,195,194);
 }
 .App {
     margin: 0px;
@@ -7,12 +8,16 @@ body{
     display: flex;
     flex-direction: column;
 }
+button{
+    border: 1px solid darkgray;
+}
 button:hover {
     cursor: pointer;
 }
 .personCard {
+    background-color: rgb(217,192,255);
     display: flex;
-    border: 2px solid black ;
+    border: 1px solid darkgray ;
     border-radius: 40px;
     margin: 10px;
     margin-left: 5vw;
@@ -28,15 +33,15 @@ button:hover {
     border-radius: 50px;
 }
 .deleteButton {
-    margin-right: 20px;
+    margin-right: 10px;
     background-color: red;
 }
 .editButton{
-    margin-left: 20px;
+    margin-left: 10px;
     background-color: yellow;
 }
 .cardContent {
-    margin-left: 20px;
+    margin-left: 0px;
 }
 .addButton {
     width: 150px;
@@ -46,14 +51,14 @@ button:hover {
     border-radius: 5px;
 }
 .Header {
-    padding-left: 6vw;
+    padding-left: 5vw;
     padding-top: 10px;
     width: 100vw;
     height: 30px;
     color: aliceblue;
     display: flex;
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.50);
 }
 .content{
     margin-top: 50px;
@@ -71,7 +76,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     position: fixed;
-    background-color: rgba(200,200,200,1);
+    background-color: rgba(255,195,194);
     border-radius: 20px;
     min-height: 200px;
     min-width: 400px;
@@ -95,7 +100,7 @@ button:hover {
     margin: 30px;
 }
 .idContent{
-    margin: 20px;
+    margin: 10px;
 }
 input{
     width: 93%;
