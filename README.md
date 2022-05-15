@@ -23,3 +23,13 @@ npm run build
 ```shell
 serve -s build
 ```
+
+Был использован Google JavaScript Style Guide: https://google.github.io/styleguide/javascriptguide.xml
+
+В правилах прописал:
+
+``
+"rules": {
+"require-jsdoc" : 0
+}
+``
